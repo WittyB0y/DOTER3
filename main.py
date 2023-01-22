@@ -28,7 +28,7 @@ def start(link: str, path):
                 eel.writer(f'<div>{result}</div>')
             else:
                 eel.writer(f'<div>Нет данных</div>')
-    return 'ok'
+    return '<div>ok</div>'
 
 
 @eel.expose
