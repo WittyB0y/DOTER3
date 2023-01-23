@@ -1,6 +1,7 @@
 import eel
-import requester as r
 import wx
+import filter as filtertools
+import requester as r
 
 eel.init("web")
 
@@ -12,7 +13,7 @@ def reader(path: str) -> [str]:
 
 
 @eel.expose
-def start(link: str, path):
+def start(link: str, path: str) -> str:
     eel.writer('<div>Инициализация...</div>')
     file = reader(path)
     for data in file:
@@ -28,7 +29,17 @@ def start(link: str, path):
                 eel.writer(f'<div>{result}</div>')
             else:
                 eel.writer(f'<div>Нет данных</div>')
-    return '<div>ok</div>'
+    try:
+        return f'<div>Сбор завершён<br>Вопросы сохранены в <div id="filePathTag">{fileName}</div></div><br><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button>'
+    except UnboundLocalError as e:
+        return f'<div>Сбор завершён</div>'
+
+
+@eel.expose
+def deleteDub(path: str):
+    eel.writer(f'<div>Удаление дубликатов запущено</div>')
+    filtertools.main(path)
+    return 'ok'
 
 
 @eel.expose
