@@ -9,7 +9,10 @@ def getCsrf() -> tuple():
     """Get CSRF to auth"""
     ses = r.session()
     getElements = bs(ses.get(globAuthLink).content, 'lxml')
-    return getElements.select_one('input[name=logintoken]')['value'], ses  # tuple with csrf and session
+    try:
+        return getElements.select_one('input[name=logintoken]')['value'], ses  # tuple with csrf and session
+    except TypeError as e:
+        return '0', ses
 
 
 def auth(link: str, login: str, password: str, data: tuple) -> list:
@@ -83,8 +86,10 @@ def getTest(data):
     return result, data[0]
 
 
-def getData(link: str, login: str, password: str) -> lxml:
+def getData(link: str, login: str, password: str) -> lxml or bool:
     data = getCsrf()
+    if data == 'error3':
+        return 'error3'
     getAuth = auth(link, login, password, data)
     if getAuth == 'error2':
         return False

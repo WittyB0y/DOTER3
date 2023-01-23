@@ -18,13 +18,6 @@ async function getLink() {
     }
     let res = await eel.start(link, path.textContent)();
 
-
-    if (res == 'error0') {
-        res = "<p class='error'>Файл logins.txt не был найден</p>"
-    }
-    if (res == 'error1') {
-        res = "<p class='error'>Файл logins.txt не содержит логины и пароли</p>"
-    }
     document.getElementById('info').innerHTML += res;
 }
 
@@ -53,6 +46,12 @@ const validLink = link => {
         return true
     }
     return false
+}
+
+async function deleteDub(){
+    let filePath = document.getElementById('filePathTag').textContent
+    let result = await eel.deleteDub(filePath)
+    document.getElementById('submitDelete').innerHTML = ""
 }
 
 const destroyer = () => {
