@@ -1,0 +1,111 @@
+#delBtnHandler{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+#delBtnHandler #submitDelete{
+    margin: 1rem;
+    padding: .5rem;
+
+    width: 25vw;
+    height: 10vh;
+
+    border: none;
+    border-radius: 1rem;
+    background-color: #303030;
+
+    color: #c5c5c5;
+    font-size: 25px;
+}
+
+/* Modal window */
+.modalData *{
+    margin: 1rem;
+}
+
+/* ModalData is background of the modal window */
+.modalData{
+    top: -10px;
+    left: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Modal window itself */
+.modalWindow{
+    display: flex;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 80vw;
+    height: 75vh;
+    border: 0px solid black;
+    background-color: rgba(14, 14, 14, 0.95);
+    flex-direction: column;
+
+    font-size: 22px;
+}
+
+/* Customizing main text in the modal window*/
+.modalWindow .modalMainText{
+    width: 60%;
+    padding: 1rem;
+
+    border-radius: 1rem;
+    border: none;
+
+    background-color: rgba(255, 255, 255, 0.53);
+    color: #303030;
+    text-align: justify;
+}
+
+.modalWindow .modalMainText:hover{
+    transform: scale(1.2);
+    transition: .2s;
+}
+
+/* Customizing main SUBMIT button in the modal window */
+.modalWindow .modalSubmitBtn{
+    width: 20vw;
+    height: 10vh;
+
+    border: none;
+    border-radius: 1rem;
+
+    background-color: rgba(128, 128, 128, 0.53);
+
+    color: #c4c4c4;
+    font-size: 26px;
+}
+
+.modalWindow .modalSubmitBtn:hover{
+    background-color: rgba(73, 73, 73, 0.53);
+}
+
+/* Customizing example of password and logins in modal window */
+.modalWindow .modalExample{
+    color: #303030;
+    font-size: 24px;
+
+    width: 60%;
+    text-align: center;
+
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.53);
+}
+
+.modalWindow .modalExample:hover{
+    transform: scale(1.2);
+    transition: .2s;
+}

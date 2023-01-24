@@ -24,14 +24,18 @@ async function getLink() {
 function getFilePath(param=false) {
     let data = document.querySelector('.modal');
     if(param) {
-      data.innerHTML = `<div class="modalData">
-    <div class="data">Создайте файл с расширением .txt, который содержит логины и пароли от аккаунтов dot3.gsu.by.
-    <br>Пример заполнения файла:
-    <br>login1[пробел]password1
-    <br>login2[пробел]password2
-    <br>
-    <button type="submit" onclick="getFilePath()">Ок</button>
-    </div>
+      data.innerHTML = `
+    <div class="modalData">
+        <div class="modalWindow">
+            <div class="modalMainText">Создайте файл с расширением .txt, который содержит логины и пароли от аккаунтов dot3.gsu.by.</div>
+            <div class="modalExample">
+                Пример заполнения файла: <br>
+                <br>login1[пробел]password1
+                <br>login2[пробел]password2
+                <br>
+            </div>
+        <button type="submit" onclick="getFilePath()" class="modalSubmitBtn">Ок</button>
+        </div>
     </div>`
     }
     else {
@@ -40,6 +44,7 @@ function getFilePath(param=false) {
     }
 
 }
+
 
 const validLink = link => {
     if (link.match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) {
@@ -51,7 +56,7 @@ const validLink = link => {
 async function deleteDub(){
     let filePath = document.getElementById('filePathTag').textContent
     let result = await eel.deleteDub(filePath)
-    document.getElementById('submitDelete').innerHTML = ""
+    document.getElementById('submitDelete').remove()
 }
 
 const destroyer = () => {

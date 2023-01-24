@@ -30,7 +30,8 @@ def start(link: str, path: str) -> str:
             else:
                 eel.writer(f'<div>Нет данных</div>')
     try:
-        return f'<div>Сбор завершён<br>Вопросы сохранены в <div id="filePathTag">{fileName}</div></div><br><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button>'
+        print(fileName)
+        return f'<div>Сбор завершён<br>Вопросы сохранены в <div id="filePathTag">{fileName}</div></div><div id="delBtnHandler"><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button></div>'
     except UnboundLocalError as e:
         return f'<div>Сбор завершён</div>'
 
@@ -50,7 +51,7 @@ def openFile(wildcard="*"):
     if dialog.ShowModal() == wx.ID_OK:
         path = dialog.GetPath()
     else:
-        path = None
+        path = 'Не выбран файл!'
     dialog.Destroy()
     return f'<div id="pathToFile">{path}</div>'
 

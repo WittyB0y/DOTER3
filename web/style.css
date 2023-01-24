@@ -95,31 +95,6 @@ body {
 }
 
 
-.modalData{
-    top: -10px;
-    left: -10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-}
-
-.data{
-    display: flex;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    width: 80vw;
-    height: 75vh;
-    border: 1px solid black;
-    background-color: rgba(14, 14, 14, 0.89);
-    flex-direction: column;
-}
 
 .error{
     font-size: 24px;
