@@ -42,7 +42,7 @@ def writer(questions, h1, score, corr, uncorr):
         with open(nameFile, 'a', encoding='utf-8') as f:
             for q in questions:
                 f.write(q[0] + '\n' + q[1] + '\n')
-    return f'<div>Правильных ответов: {corr}</div><div>Неправильных ответов: {uncorr}</div><div>Результат: {score}</div>', nameFile
+    return f'Правильных ответов: {corr}</div><div>Неправильных ответов: {uncorr}</div><div>Результат: {score}</div>', nameFile
 
 
 def getQuestions(datas: lxml):
@@ -72,18 +72,19 @@ def getQuestions(datas: lxml):
 
 
 def getTest(data):
-    result = ''
+    res_data = ''
     session = data[1]
     links = data[0]
-    for link in links:
+    for t, link in enumerate(links):
         payload = {
             'attempt': link[link.find('=') + 1:link.rfind('&')],
             'cmid': link[link.rfind('=') + 1:]
         }
         allTest = bs(session.get(link, data=payload).content, 'lxml')
         data = getQuestions(allTest)
-        result += f'<div>{data[1]}</div>'
-    return result, data[0]
+        res_data += f'<div>{t + 1}. {data[0]}'
+        result = f'<div>{data[1]}</div>'
+    return result, res_data
 
 
 def getData(link: str, login: str, password: str) -> lxml or bool:
