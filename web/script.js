@@ -1,6 +1,7 @@
 eel.expose(writer);
 function writer(data) {
     document.getElementById('info').innerHTML += data;
+    document.getElementById('info').scrollTop = document.getElementById('info').scrollHeight
 }
 async function getLink() {
     let link = document.getElementById('link').value;
@@ -8,17 +9,15 @@ async function getLink() {
     destroyer()
 
     if (link.length < 1) {
-        return document.getElementById('info').innerHTML = "<p class='error'>Введите ссылку</p>";
+        return document.getElementById('info').innerHTML = "<div class='notification error'>Введите ссылку</div>";
     }
     else if (!validLink(link)) {
-        return document.getElementById('info').innerHTML = "<p class='error'>Ссылка не действительна</p>";
+        return document.getElementById('info').innerHTML = "<div class='notification error'>Ссылка не действительна</div>";
     }
     if (!path){
-        return document.getElementById('info').innerHTML = "<p class='error'>Необходимо выбрать файл</p>";
+        return document.getElementById('info').innerHTML = "<div class='notification error'>Необходимо выбрать файл</div>";
     }
     let res = await eel.start(link, path.textContent)();
-
-    document.getElementById('info').innerHTML += res;
 }
 
 function getFilePath(param=false) {

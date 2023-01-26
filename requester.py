@@ -55,6 +55,8 @@ def getQuestions(datas: lxml):
     answers = datas.find_all('div', {'r0', 'r1', 'r2', 'r3'})
     all_answ = [x.text.strip() for x in answers if 'checked' in str(x)]
     grade = [correction[x] for x in range(0, (len(correction)), 2)]
+    if len(all_answ) != len(grade):
+        return ['Пустой тест', '-']
     quests = [correction[x] for x in range(1, (len(correction)), 2)]
     v = 0
     corr = 0

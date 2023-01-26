@@ -5,7 +5,7 @@ def writer(corr_dict, file):
     with open(f'FIX+{random.randint(0, 1000)}.txt', 'a', encoding='utf-8') as f:
         for k, v in corr_dict.items():
             f.write(k + '\n' + v + '\n')
-    return 'Done'
+    return int(len(corr_dict)/2)
 
 
 def main(path_to_file: str):
