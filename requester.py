@@ -15,7 +15,7 @@ def getCsrf() -> tuple():
         return '0', ses
 
 
-def auth(link: str, login: str, password: str, data: tuple) -> list:
+def auth(link: str, login: str, password: str, data: tuple, writer) -> list:
     csrf = data[0]
     session = data[1]
 
@@ -28,7 +28,7 @@ def auth(link: str, login: str, password: str, data: tuple) -> list:
     checkForNotAuth = session.post(globAuthLink, data=authData)
     if bs(checkForNotAuth.content, 'lxml').select_one('div[class="alert alert-danger"]'):  # if this elemet exists it
         # means wrong login and password
-        return "error2"
+        return writer(f'<div class="notification emodzi"><p>Не верный логин или пароль</p><p>🚫</p></div>')
     result = bs(session.get(link, data={'id': link[link.rfind('=') + 1:]}).content, 'lxml')
     links = [x.a['href'] for x in result.select('td[class="cell c4 lastcol"]') if x.a is not None]
     if len(links) == 0:
@@ -42,7 +42,7 @@ def writer(questions, h1, score, corr, uncorr):
         with open(nameFile, 'a', encoding='utf-8') as f:
             for q in questions:
                 f.write(q[0] + '\n' + q[1] + '\n')
-    return f'Правильных ответов: {corr}</div><div>Неправильных ответов: {uncorr}</div><div>Результат: {score}</div>', nameFile
+    return f'Правильных ответов: {corr}<p>🟢</p></div><div class="emodzi">Неправильных ответов: {uncorr}<p>🔴</p></div><div>Результат: {score}</div></div>', nameFile
 
 
 def getQuestions(datas: lxml):
@@ -71,8 +71,10 @@ def getQuestions(datas: lxml):
     return writer(allData, h1, score, corr, uncorr)
 
 
-def getTest(data):
+def getTest(data, writer):
     res_data = ''
+    if callable(data):
+        return False
     session = data[1]
     links = data[0]
     for t, link in enumerate(links):
@@ -82,16 +84,14 @@ def getTest(data):
         }
         allTest = bs(session.get(link, data=payload).content, 'lxml')
         data = getQuestions(allTest)
-        res_data += f'<div>{t + 1}. {data[0]}'
-        result = f'<div>{data[1]}</div>'
+        writer(f'<div class="notification"><div class="emodzi">{t + 1}. {data[0]}')
+        result = f'<div class="fileSaved">{data[1]}</div>'
     return result, res_data
 
 
-def getData(link: str, login: str, password: str) -> lxml or bool:
+def getData(link: str, login: str, password: str, writer) -> lxml or bool:
     data = getCsrf()
     if data == 'error3':
         return 'error3'
-    getAuth = auth(link, login, password, data)
-    if getAuth == 'error2':
-        return False
-    return getTest(getAuth)
+    getAuth = auth(link, login, password, data, writer)
+    return getTest(getAuth, writer)
