@@ -14,31 +14,29 @@ def reader(path: str) -> [str]:
 
 @eel.expose
 def start(link: str, path: str) -> str:
-    eel.writer('<div>Инициализация...</div>')
+    eel.writer('<div class="notification">Инициализация...</div>')
     file = reader(path)
     for data in file:
         data = data.split()
-        eel.writer(f'<div>Авторизация {data[0].upper()}</div>')
-        result = r.getData(link, data[0], data[1])
-        if not result:
-            eel.writer(f'<div>Не верный логин или пароль</div>')
+        eel.writer(f'<div class="notification">Авторизация {data[0].upper()}</div>')
+        result = r.getData(link, data[0], data[1], eel.writer)
+        if isinstance(result, bool):
+            continue
+        fileName = result[0]
+        result = result[1]
+        if len(result) > 0:
+            eel.writer(f'<div>{result}</div>')
         else:
-            fileName = result[0]
-            result = result[1]
-            if len(result) > 0:
-                eel.writer(f'<div>{result}</div>')
-            else:
-                eel.writer(f'<div>Нет данных</div>')
+            eel.writer(f'<div class="notification">Нет данных</div>')
     try:
-        print(fileName)
-        return f'<div>Сбор завершён<br>Вопросы сохранены в <div id="filePathTag">{fileName}</div></div><div id="delBtnHandler"><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button></div>'
+        return f'<div class="notification">Сбор завершён</div><div class="notification">Вопросы сохранены в:<div class="notification" id="filePathTag">{fileName}</div></div><div id="delBtnHandler"><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button></div>'
     except UnboundLocalError as e:
-        return f'<div>Сбор завершён</div>'
+        return f'<div class="notification">Сбор завершён</div>'
 
 
 @eel.expose
 def deleteDub(path: str):
-    eel.writer(f'<div>Удаление дубликатов запущено</div>')
+    eel.writer(f'<div class="notification attetion">Удаление дубликатов запущено</div>')
     filtertools.main(path)
     return 'ok'
 
@@ -53,7 +51,7 @@ def openFile(wildcard="*"):
     else:
         path = 'Не выбран файл!'
     dialog.Destroy()
-    return f'<div id="pathToFile">{path}</div>'
+    return f'<div id="pathToFile" class="notification">{path}</div>'
 
 
 eel.start("main.html", size=(700, 700))
