@@ -2,6 +2,8 @@ import eel
 import wx
 import filter as filtertools
 import requester as r
+from playsound import playsound
+
 
 eel.init("web")
 
@@ -26,19 +28,20 @@ def start(link: str, path: str) -> str:
         result = result[1]
         if len(result) > 0:
             eel.writer(f'<div>{result}</div>')
-        else:
-            eel.writer(f'<div class="notification">Нет данных</div>')
+        # else:
+        #     eel.writer(f'<div class="notification error">Нет данных</div>')
     try:
-        return f'<div class="notification">Сбор завершён</div><div class="notification">Вопросы сохранены в:<div class="notification" id="filePathTag">{fileName}</div></div><div id="delBtnHandler"><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button></div>'
+        eel.writer(f'<div class="notification">Сбор завершён</div><div class="notification">Вопросы сохранены в:<div class="notification" id="filePathTag">{fileName}</div></div><div id="delBtnHandler"><button id="submitDelete" onclick="deleteDub()">Удалить дубликаты</button></div>')
+        playsound("web\\notification_sound.mp3")
     except UnboundLocalError as e:
         return f'<div class="notification">Сбор завершён</div>'
 
 
 @eel.expose
 def deleteDub(path: str):
-    eel.writer(f'<div class="notification attetion">Удаление дубликатов запущено</div>')
-    filtertools.main(path)
-    return 'ok'
+    output = filtertools.main(path)
+    eel.writer('<div class="notification attetion">Дубликаты удалены</div>')
+    return eel.writer(f'<div class="notification attetion">Файл содержит {output} уникальных вопроса</div>')
 
 
 @eel.expose
@@ -49,7 +52,9 @@ def openFile(wildcard="*"):
     if dialog.ShowModal() == wx.ID_OK:
         path = dialog.GetPath()
     else:
+        dialog.Destroy()
         path = 'Не выбран файл!'
+        return f'<div class="notification error">{path}</div>'
     dialog.Destroy()
     return f'<div id="pathToFile" class="notification">{path}</div>'
 

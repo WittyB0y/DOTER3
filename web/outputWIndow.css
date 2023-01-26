@@ -20,6 +20,11 @@
     font-size: 25px;
 }
 
+#delBtnHandler #submitDelete:hover{
+    background-color: rgba(48, 48, 48, 0.85);
+    color: white;
+}
+
 /* Modal window */
 .modalData *{
     margin: 1rem;
@@ -117,6 +122,17 @@
     margin: 1rem .5rem;
     background-color: #303030;
     color: white;
+}
+
+/* Error message customization */
+.error{
+    text-align: center;
+    font-size: 24px;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    color: #000000;
+    background-color: #b6330b;
 }
 
 .emodzi{

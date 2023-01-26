@@ -50,6 +50,7 @@ body {
     color: #ffffff;
 }
 
+/* Styling submit button for an active mode and a hover mode */
 #submit {
     width: 50vw;
     background-color: var(--color-back);
@@ -59,8 +60,11 @@ body {
     border:none;
     color: #303030;
 }
+#submit:hover{
+    background-color: rgba(199, 199, 199, 0.53);
+}
 #submit:active{
-    background-color: #FFC371;
+    background-color: rgba(166, 166, 166, 0.53);
 }
 .logo{
     aspect-ratio: 4/3;
@@ -84,6 +88,7 @@ body {
     cursor: help;
 }
 
+/* Styling chooseFile button for a hover mode. Active mode don't needed cuz user see the result immediately */
 #chooseFile{
     width: 20vw;
     background-color: var(--color-back);
@@ -94,16 +99,11 @@ body {
     color: #303030;
 }
 
-
-
-.error{
-    font-size: 24px;
-    padding: .5rem 1rem;
-    border-radius: 1rem;
-    font-weight: 700;
-    color: #000000;
+#chooseFile:hover{
+    background-color: rgba(199, 199, 199, 0.53);
 }
 
+/* Styling output console */
 #info{
     background-color: var(--color-back);
     position: relative;
@@ -115,8 +115,10 @@ body {
     padding: .5rem;
     font-family: 'PT Sans Narrow', sans-serif;
     letter-spacing: .2px;
+    scroll-behavior: smooth;
 }
 
+/* Styling scrollbar */
 ::-webkit-scrollbar {
   width: 13px;
 }
@@ -136,6 +138,7 @@ body {
   background: #98941e
 }
 
+/* Styling image */
 .divImg{
     width: 10vw;
     position: absolute;
