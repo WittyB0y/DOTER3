@@ -5,6 +5,33 @@
     align-items: center;
 }
 
+#divbtnfunc{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#divbtnfunc #funcToClipboard{
+    margin: 1rem;
+    padding: .5rem;
+
+    width: 25vw;
+    height: 10vh;
+
+    border: none;
+    border-radius: 1rem;
+    background-color: #303030;
+
+    color: #c5c5c5;
+    font-size: 25px;
+}
+
+#divbtnfunc #funcToClipboard:hover{
+    background-color: rgba(48, 48, 48, 0.85);
+    color: white;
+}
+
 #delBtnHandler #submitDelete{
     margin: 1rem;
     padding: .5rem;
@@ -147,12 +174,17 @@
 .fileSaved{
     border: 2px solid #a0a0a0;
     border-radius: 1rem;
-    padding: 1rem 0;
+    padding: 1rem;
+    font-size: 26px;
 
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
+}
+
+#uniSavedFile{
+    font-size: 26px;
 }
 
 .attention{

@@ -3,6 +3,12 @@ function writer(data) {
     document.getElementById('info').innerHTML += data;
     document.getElementById('info').scrollTop = document.getElementById('info').scrollHeight
 }
+eel.expose(readSavedFileName)
+function readSavedFileName() {
+    let file = document.getElementById('uniSavedFile').textContent;
+    eel.funcToСlipboard(file)
+}
+
 async function getLink() {
     let link = document.getElementById('link').value;
     let path = document.getElementById('pathToFile');

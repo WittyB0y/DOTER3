@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs
 import lxml
 
 globAuthLink = 'http://dot3.gsu.by/login/index.php'
+globFileName = '-'
 
 
 def getCsrf() -> tuple():
@@ -55,8 +56,9 @@ def getQuestions(datas: lxml):
     answers = datas.find_all('div', {'r0', 'r1', 'r2', 'r3'})
     all_answ = [x.text.strip() for x in answers if 'checked' in str(x)]
     grade = [correction[x] for x in range(0, (len(correction)), 2)]
+    global globFileName
     if len(all_answ) != len(grade):
-        return ['Пустой тест', '-']
+        return ['Пустой тест', "_".join(globFileName.split())[:30] + '.txt']
     quests = [correction[x] for x in range(1, (len(correction)), 2)]
     v = 0
     corr = 0
@@ -70,7 +72,8 @@ def getQuestions(datas: lxml):
                 allData.append([quests[v], '+++' + all_answ[v]])
                 corr += 1
         v += 1
-    return writer(allData, h1, score, corr, uncorr)
+    globFileName = h1 if len(globFileName) == 1 else globFileName
+    return writer(allData, globFileName, score, corr, uncorr)
 
 
 def getTest(data, writer):
