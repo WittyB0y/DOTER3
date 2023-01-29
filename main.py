@@ -1,10 +1,8 @@
-import eel
-import wx
-import filter as filtertools
+import eel, wx, pyperclip as copytext
 import requester as r
+import filter as filtertools
 from playsound import playsound
 from solver import fillFunc
-import pyperclip as copytext
 
 eel.init("web")
 
@@ -37,8 +35,6 @@ def start(link: str, path: str) -> str:
         result = result[1]
         if len(result) > 0:
             eel.writer(f'<div>{result}</div>')
-        # else:
-        #     eel.writer(f'<div class="notification error">Нет данных</div>')
     try:
         eel.writer(
             f'<div class="notification">Сбор завершён</div><div class="notification">Вопросы сохранены в:<div '
@@ -62,7 +58,7 @@ def deleteDub(path: str):
 @eel.expose
 def openFile(wildcard="*.txt"):
     app = wx.App(None)
-    style = (wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
+    style = wx.FD_OPEN | wx.FD_FILE_MUST_EXIST | wx.STAY_ON_TOP
     dialog = wx.FileDialog(None, 'Open', wildcard=wildcard, style=style)
     if dialog.ShowModal() == wx.ID_OK:
         path = dialog.GetPath()

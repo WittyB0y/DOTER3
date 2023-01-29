@@ -1,4 +1,5 @@
-def fillFunc(data):
+def fillFunc(data: list) -> str:  # takes data and concatenates list contains questions and answers, this list
+    # converts to str
     funcJS = """function autoSolve (){
     let data = """ + str(data) + """
         const collection = document.getElementsByClassName("formulation clearfix")
@@ -22,4 +23,3 @@ def fillFunc(data):
 }
 autoSolve ();"""
     return funcJS
-

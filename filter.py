@@ -1,4 +1,5 @@
-def writer(corr_dict, file):
+def writer(corr_dict: dict, file: str) -> tuple:
+    """This func gets dict contains questions and answer, the second argument is path to file"""
     file = f'FIX+{file}'
     with open(file, 'a', encoding='utf-8') as f:
         for k, v in corr_dict.items():
@@ -10,8 +11,6 @@ def main(path_to_file: str):
     corr_dict = {}
     with open(path_to_file, 'r', encoding='utf-8') as f:
         dataFile = f.readlines()
-    if len(dataFile) % 2 != 0:
-        print('Чё-то не так. Количество строк должно быть чётным.')
     questions = [dataFile[question] for question in range(0, len(dataFile), 2)]
     answers = [dataFile[answer] for answer in range(1, len(dataFile), 2)]
     counter = 0
