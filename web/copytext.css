@@ -1,0 +1,38 @@
+.copySuccses{
+    top: -10rem;
+    background-color: #5cc727;
+    border-radius: 1rem;
+    width: 45vw;
+    height: 6vh;
+    position: absolute;
+
+
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    animation: dropsucces 2s 1;
+
+}
+
+@keyframes dropsucces {
+    from {
+        transform: translateY(-10rem);
+    }
+    12%, 75% {
+        transform: translateY(10rem);
+    }
+    to {
+        transform: translateY(-10rem);
+    }
+}
+
+.succssestxt{
+    width: 60%;
+    font-size: 25px;
+}
+
+.copySuccses img {
+    height: 4vh;
+    aspect-ratio: 1/1;
+    margin-left:1rem;
+}

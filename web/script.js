@@ -4,9 +4,9 @@ function writer(data) {
     document.getElementById('info').scrollTop = document.getElementById('info').scrollHeight
 }
 eel.expose(readSavedFileName)
-function readSavedFileName() {
+async function readSavedFileName() {
     let file = document.getElementById('uniSavedFile').textContent;
-    eel.funcToСlipboard(file)
+    await showerPushNot()
 }
 
 async function getLink() {
@@ -66,4 +66,13 @@ async function deleteDub(){
 
 const destroyer = () => {
     document.getElementById('info').innerHTML = ""
+
+}
+
+function showerPushNot() {
+    const divWindowResult = document.getElementById('idwindow')
+    divWindowResult.style.display = "flex"
+    setInterval(()=>{
+        divWindowResult.style.display = "none"
+    }, 2100)
 }

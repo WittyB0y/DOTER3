@@ -2,3 +2,5 @@
 _pycache_
 test.py
 *.txt
+*.c
+!requirements.txt
