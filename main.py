@@ -1,8 +1,10 @@
-import eel, wx, pyperclip as copytext
+import eel, pyperclip as copytext
 import requester as r
 import filter as filtertools
 from playsound import playsound
 from solver import fillFunc
+import tkinter as tk
+from tkinter import filedialog
 
 eel.init("web")
 
@@ -56,17 +58,13 @@ def deleteDub(path: str):
 
 
 @eel.expose
-def openFile(wildcard="*.txt"):
-    app = wx.App(None)
-    style = wx.FD_OPEN | wx.FD_FILE_MUST_EXIST | wx.STAY_ON_TOP
-    dialog = wx.FileDialog(None, 'Open', wildcard=wildcard, style=style)
-    if dialog.ShowModal() == wx.ID_OK:
-        path = dialog.GetPath()
-    else:
-        dialog.Destroy()
-        path = 'Не выбран файл!'
-        return f'<div class="notification error">{path}</div>'
-    dialog.Destroy()
+def openFile():
+    root = tk.Tk()
+    root.attributes("-topmost", True)
+    path = filedialog.askopenfilename(filetypes=(('text', '*.txt'),))
+    root.destroy()
+    if len(path) < 1 or path is None:
+        return '<div id="pathToFile" class="notification">Не выбран файл!</div>'
     return f'<div id="pathToFile" class="notification">{path}</div>'
 
 
