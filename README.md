@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 [![screen](https://i.postimg.cc/RFmzMXw3/1.jpg)](https://postimg.cc/WD5y8mWj)
 
-7. The name of the new file will be displayed (FIX +[NAME OF TEST ].TXT).
+7. The name of the new file will be displayed (FIX +[NAME OF THE TEST].TXT).
 A button will appear that copies the JS code to the clipboard, which can be pasted into the browser console at the time of passing the test, in order to automatically fill in the correct answers.
 
 [![screen](https://i.postimg.cc/Jn6gWc8J/end.png)](https://postimg.cc/bDnLxnsN)
